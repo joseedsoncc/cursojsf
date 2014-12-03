@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><h:outputText value="#{msg['page.usuariosEditar.title']}" /></title>
+</h:head>
+<h:body>
+	<h:form id="usuarioForm">
+		<h:inputHidden value="#{usuarioBean.usuario.id}" />
+		<h:panelGrid columns="3">
+			
+			<h:outputLabel for="idInput" value="#{msg['page.usuarios.label.id']}:" />
+			<h:inputText id="idInput" value="#{usuarioBean.usuario.id}" disabled="true" />
+			<h:panelGroup />
+			
+			<h:outputLabel for="cpfInput" value="#{msg['page.usuarios.label.cpf']}:" />
+			<h:inputText id="cpfInput" value="#{usuarioBean.usuario.cpf}" required="true">
+				<f:converter converterId="converters.CpfConverter" />
+				<f:validator validatorId="validators.CpfValidator" />
+				<f:validateLength minimum="11" maximum="14"/>
+			</h:inputText>
+			<h:message for="cpfInput" errorStyle="color: red;"/>
+			
+			<h:outputLabel for="nomeReduzidoInput" value="#{msg['page.usuarios.label.nomeReduzido']}:" />
+			<h:inputText id="nomeReduzidoInput" value="#{usuarioBean.usuario.nomeReduzido}" required="true" />
+			<h:message for="nomeReduzidoInput" />
+			
+			<h:outputLabel for="nomeCompletoInput" value="#{msg['page.usuarios.label.nomeCompleto']}:" />
+			<h:inputTextarea id="nomeCompletoInput" value="#{usuarioBean.usuario.nomeCompleto}" rows="5" cols="20" />
+			<h:message for="nomeCompletoInput" />
+			
+			<h:outputLabel for="dtNasc" value="#{msg['page.usuarios.label.dataNascimento']}:" />
+			<h:inputText id="dtNasc" value="#{usuarioBean.usuario.dataNascimento}" disabled="true" >
+				<f:convertDateTime pattern="#{msg['commons.padraoData']}"/>
+			</h:inputText>
+			<h:message for="dtNasc" />
+			
+			<h:outputLabel for="emailInput" value="#{msg['page.usuarios.label.email']}:" />
+			<h:inputText id="emailInput" value="#{usuarioBean.usuario.email}" />
+			<h:message for="emailInput" />
+			
+			<h:outputLabel for="senhaInput" value="#{msg['page.usuarios.label.senha']}:" />
+			<h:inputText id="senhaInput" value="#{usuarioBean.usuario.senha}" />
+			<h:message for="senhaInput" />
+			
+		</h:panelGrid>
+		<hr />
+		
+		<h:panelGrid columns="2">
+			<h:commandButton action="#{usuarioBean.salvar}" value="#{msg['commons.salvar']}" />
+			<h:commandButton action="usuarios" value="#{msg['commons.voltar']}" immediate="true" />
+		</h:panelGrid>	
+	
+	</h:form>
+</h:body>
+</html>
